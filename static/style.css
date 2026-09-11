@@ -1,0 +1,546 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --cream: #F5E8CC;
+    --brown: #6B4632;
+    --dark-brown: #4A3024;
+    --deep: #211812;
+    --gold: #B08D57;
+    --gold-light: #D0B37A;
+    --ink: #2F241C;
+    --muted: #66584C;
+    --soft: #8B7967;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at center, #6B4632 0%, #3B2B22 50%, #211812 100%);
+    font-family: Georgia, "Times New Roman", serif;
+    overflow: hidden;
+}
+
+.book {
+    position: relative;
+    width: min(42vw, 420px);
+    height: min(59.4vw, 594px);
+    perspective: 2000px;
+}
+
+.page, .journal-page {
+    position: relative;
+    width: min(42vw, 420px);
+    height: min(59.4vw, 594px);
+    background: var(--cream);
+    border-radius: 5px 12px 12px 5px;
+    box-shadow: 0 30px 60px rgba(0,0,0,.5), inset 0 0 35px rgba(90,60,30,.15);
+    overflow: hidden;
+}
+
+.book .page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.page::before, .journal-page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 5px, rgba(100,70,40,.025) 6px);
+    pointer-events: none;
+}
+
+.journal-page::after {
+    content: "";
+    position: absolute;
+    inset: 18px;
+    border: 1px solid rgba(176,141,87,.65);
+    border-radius: 4px 10px 10px 4px;
+    pointer-events: none;
+}
+
+.page-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: var(--ink);
+    opacity: 0;
+    transition: opacity 1.2s ease 1.5s;
+}
+
+.page-content .ornament,
+.header .ornament {
+    color: var(--gold);
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.page-content h1 {
+    font-size: 34px;
+    font-weight: normal;
+    letter-spacing: 2px;
+}
+
+.page-content p {
+    margin-top: 15px;
+    font-size: 16px;
+    color: var(--muted);
+    font-style: italic;
+}
+
+.begin, .analyze-button, .action-button, .close-journal-button {
+    padding: 12px 30px;
+    background: var(--brown);
+    color: var(--cream);
+    border: 1px solid var(--gold);
+    font-family: Georgia, serif;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: .3s;
+    text-decoration: none;
+    text-align: center;
+}
+
+.begin {
+    display: block;
+    margin: 35px auto 0;
+}
+
+.begin:hover, .analyze-button:hover, .action-button:hover, .close-journal-button:hover {
+    background: var(--dark-brown);
+    transform: translateY(-2px);
+}
+
+.cover {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(circle at 30% 25%, rgba(176,141,87,.12), transparent 25%),
+        radial-gradient(circle at 70% 75%, rgba(176,141,87,.08), transparent 30%),
+        #4A3024;
+    border-radius: 7px 15px 15px 7px;
+    box-shadow: 0 30px 60px rgba(0,0,0,.55), inset 0 0 0 5px #6B4632, inset 0 0 0 9px #3A261D;
+    z-index: 5;
+    transform-origin: left center;
+    transform: rotateY(0deg);
+    transition: transform 2.2s cubic-bezier(.65,.05,.36,1);
+    transform-style: preserve-3d;
+}
+
+.cover::before {
+    content: "";
+    position: absolute;
+    inset: 18px;
+    border: 2px solid var(--gold);
+    border-radius: 5px 12px 12px 5px;
+}
+
+.cover::after {
+    content: "";
+    position: absolute;
+    inset: 30px;
+    border: 1px solid rgba(176,141,87,.55);
+    border-radius: 4px 9px 9px 4px;
+}
+
+.cover-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--gold);
+    padding: 55px 45px;
+    z-index: 3;
+    backface-visibility: hidden;
+}
+
+.cover-subtitle {
+    font-size: 11px;
+    letter-spacing: 4px;
+    margin-bottom: 18px;
+}
+
+.cover-title {
+    font-size: clamp(25px, 3.2vw, 37px);
+    line-height: 1.25;
+    font-weight: normal;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 1px var(--ink);
+}
+
+.cover-line {
+    width: 100px;
+    height: 1px;
+    background: var(--gold);
+    margin: 22px 0;
+    position: relative;
+}
+
+.cover-line::after {
+    content: "◆";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    background: #4A3024;
+    padding: 0 8px;
+    font-size: 10px;
+}
+
+.cover-description {
+    font-size: 12px;
+    font-style: italic;
+    letter-spacing: 1.5px;
+    color: var(--gold-light);
+    line-height: 1.7;
+}
+
+.mood-decoration {
+    position: absolute;
+    color: var(--gold);
+    opacity: .8;
+    z-index: 2;
+    font-size: 23px;
+}
+
+.mood-1 { top:48px; left:48px; }
+.mood-2 { top:48px; right:48px; }
+.mood-3 { bottom:48px; left:48px; }
+.mood-4 { bottom:48px; right:48px; }
+
+.book.open .cover {
+    transform: rotateY(-170deg);
+}
+
+.book.open .page-content {
+    opacity: 1;
+}
+
+.open-button {
+    position: fixed;
+    bottom: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 13px 32px;
+    background: var(--gold);
+    color: var(--ink);
+    border: none;
+    font-family: Georgia, serif;
+    letter-spacing: 2px;
+    cursor: pointer;
+    z-index: 20;
+}
+
+.open-button:hover { background: var(--gold-light); }
+
+.journal-page {
+    padding: 30px 35px; /* Reduced top/bottom padding to give elements breathing room */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    margin: 0px 0 15px; /* Tighter margins */
+}
+
+.header .ornament {
+    font-size: 20px;
+    margin-bottom: 4px;
+}
+
+.header h1 {
+    color: var(--ink);
+    font-size: 25px;
+    font-weight: normal;
+    letter-spacing: 2px;
+}
+
+.header p {
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+    font-style: italic;
+}
+
+.journal-input {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 300px;
+    resize: none;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--ink);
+    font-family: "Segoe Print", "Bradley Hand", cursive;
+    font-size: 17px;
+    line-height: 2;
+    padding: 10px 5px;
+    background-image: repeating-linear-gradient(transparent, transparent 31px, rgba(120,90,55,.25) 32px);
+}
+
+.journal-input::placeholder { color: var(--soft); opacity: .8; }
+
+.writing-area {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    transition: transform .25s ease;
+}
+
+.writing-area:focus-within {
+    transform: translateY(-2px);
+}
+
+.writing-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-top: 4px;
+    padding: 0 5px;
+    color: var(--soft);
+    font-size: 10px;
+    letter-spacing: .4px;
+}
+
+.writing-meta strong {
+    color: var(--muted);
+    font-weight: normal;
+}
+
+.analyze-button {
+    position: relative;
+    z-index: 2;
+    margin-top: 20px;
+    font-size: 13px;
+    min-width: 170px;
+    transition: transform .2s ease, opacity .2s ease;
+}
+
+.analyze-button:disabled {
+    cursor: wait;
+    opacity: .78;
+    transform: none;
+}
+
+.button-loading {
+    display: none;
+}
+
+.analyze-button.is-loading .button-text {
+    display: none;
+}
+
+.analyze-button.is-loading .button-loading {
+    display: inline;
+}
+
+.footer {
+    position: absolute;
+    bottom: 35px;
+    color: var(--soft);
+    font-size: 10px;
+    letter-spacing: 1px;
+    z-index: 2;
+}
+
+.mood-card {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 12px 15px; /* Reduced vertical footprint */
+    border: 1px solid rgba(176,141,87,.7);
+    background: rgba(232,213,181,.45);
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.mood-label {
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 3px;
+    margin-bottom: 4px;
+}
+
+.mood {
+    font-size: 26px;
+    color: #69705A;
+    letter-spacing: 2px;
+}
+
+.scores {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.score-card {
+    flex: 1;
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    padding: 8px 4px;
+    text-align: center;
+}
+
+.score-title {
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+.score { color: var(--ink); font-size: 18px; }
+
+.interpretation {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 10px 12px;
+    border-left: 2px solid var(--brown);
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.5;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.buttons {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 10px;
+    z-index: 2;
+    position: relative;
+    margin-bottom: 10px; /* Space between the upper row and the lower elements */
+}
+
+.buttons .action-button {
+    flex: 1;
+    font-size: 11px;
+    padding: 10px 5px;
+}
+
+.close-journal-button {
+    display: block;
+    width: 100%;
+    font-size: 11px;
+    padding: 10px 5px;
+    margin-top: 0px;
+    z-index: 2;
+    position: relative;
+    background: transparent;
+    color: var(--brown);
+    border: 1px solid rgba(176,141,87,0.5);
+}
+
+/* Page 1 Specific Layout Fix */
+.write-another-btn {
+    display: block !important;
+    width: 100%;
+    font-size: 11px;
+    padding: 10px 5px;
+    margin-top: 0px; 
+    z-index: 2;
+    position: relative;
+}
+
+/* Page 2 Canvas Area Fixes */
+.graph-wrap {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 220px; /* Slightly shorter height prevents page clip overflow */
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(176,141,87,0.4);
+    border-radius: 4px;
+    padding: 8px;
+    margin-bottom: 15px;
+}
+
+/* Page 3 Scrollable Container Fixes */
+.history-container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-height: 260px; /* Shrunk down so the elements don't get pushed past bottom border */
+    overflow-y: auto;
+    padding-right: 6px;
+    margin-bottom: 15px;
+}
+
+.history-entry {
+    background: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(176,141,87,0.3);
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.entry-date {
+    font-size: 11px;
+    color: var(--soft);
+    margin-bottom: 4px;
+}
+.entry-text {
+    font-size: 13px;
+    color: var(--ink);
+    font-style: italic;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+.entry-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--muted);
+}
+.empty-history {
+    text-align: center;
+    color: var(--soft);
+    padding: 40px 10px;
+    font-style: italic;
+    font-size: 13px;
+}
+/* Custom Vintage Scrollbar Rendering Engine Design Injection */
+.history-container::-webkit-scrollbar {
+    width: 6px;
+}
+.history-container::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 10px;
+}
+.history-container::-webkit-scrollbar-thumb {
+    background-color: var(--gold);
+    border-radius: 10px;
+}
+.history-container::-webkit-scrollbar-thumb:hover {
+    background-color: var(--brown);
+}
+.history-container {
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold) rgba(0, 0, 0, 0.03);
+}
+
