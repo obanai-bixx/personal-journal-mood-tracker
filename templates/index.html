@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Journal Mood Tracker Using NLP</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="book" id="book">
+        <div class="page">
+            <div class="page-content">
+                <div class="ornament">✦</div>
+                <h1>Welcome to My Journal</h1>
+                <p>Every thought has a story...</p>
+                <a class="begin" href="{{ url_for('journal') }}">BEGIN</a>
+            </div>
+        </div>
+
+        <div class="cover">
+            <div class="mood-decoration mood-1">☾</div>
+            <div class="mood-decoration mood-2">✦</div>
+            <div class="mood-decoration mood-3">❋</div>
+            <div class="mood-decoration mood-4">♡</div>
+
+            <div class="cover-content">
+                <div class="cover-subtitle">An Automated</div>
+                <h1 class="cover-title">Personal Journal<br>Mood Tracker<br>Using NLP</h1>
+                <div class="cover-line"></div>
+                <p class="cover-description">thoughts • feelings • emotions<br>understood through language</p>
+            </div>
+        </div>
+    </div>
+
+    <button class="open-button" id="openButton">OPEN JOURNAL</button>
+
+    <script>
+        const book = document.getElementById("book");
+        const openButton = document.getElementById("openButton");
+
+        openButton.addEventListener("click", () => {
+            book.classList.toggle("open");
+            openButton.textContent = book.classList.contains("open")
+                ? "CLOSE JOURNAL"
+                : "OPEN JOURNAL";
+        });
+    </script>
+</body>
+</html>
