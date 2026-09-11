@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Graph</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
+</head> 
+<body> 
+    <div class="journal-page"> 
+        <div class="header"> 
+            <div class="ornament">✦</div> 
+            <h1>Mood Graph</h1> 
+            <p>The journey of your emotions</p> 
+        </div> 
+ 
+        <div class="graph-wrap"> 
+            {% if values %} 
+                <canvas id="moodChart"></canvas> 
+            {% else %} 
+                <div class="empty-history"> 
+                    ✦<br><br> 
+                    Your mood graph will appear here after you have some journal entries. 
+                </div> 
+            {% endif %} 
+        </div> 
+ 
+        <div class="buttons"> 
+            <a class="action-button" href="{{ url_for('history') }}">HISTORY ←</a> 
+            <a class="action-button" href="{{ url_for('journal') }}">NEW ENTRY</a> 
+        </div> 
+ 
+        <a class="close-journal-button" href="{{ url_for('home') }}">CLOSE JOURNAL</a> 
+    </div> 
+ 
+    {% if values %} 
+    <script type="application/json" id="chart-data">{{ {'labels': labels, 'values': values} | tojson }}</script> 
+    <script> 
+    // Feeds array metrics securely down from Flask engine values 
+    const chartData = JSON.parse(document.getElementById('chart-data').textContent); 
+    const chartLabels = chartData.labels; 
+    const moodValues = chartData.values; 
+ 
+    const canvas = document.getElementById('moodChart'); 
+ 
+    if (canvas && moodValues.length > 0) { 
+        new Chart(canvas, { 
+            type: 'line', 
+            data: { 
+                labels: chartLabels, // Uses pre-formatted dates seamlessly 
+                datasets: [{ 
+                    label: 'Mood Level', 
+                    data: moodValues, 
+                    borderColor: '#6B4632', 
+                    backgroundColor: '#B08D57', 
+                    borderWidth: 2, 
+                    tension: 0.3, 
+                    pointRadius: 4, 
+                    fill: false 
+                }] 
+            }, 
+            options: { 
+                responsive: true, 
+                maintainAspectRatio: false, 
+                plugins: { 
+                    legend: { display: false } 
+                }, 
+                scales: { 
+                    x: { 
+                        grid: { display: false }, 
+                        ticks: { 
+                            maxTicksLimit: 5, 
+                            autoSkip: true, 
+                            maxRotation: 0, 
+                            minRotation: 0, 
+                            color: '#2F241C', 
+                            font: { family: 'Georgia, serif', size: 10 } 
+                        } 
+                    }, 
+                    y: { 
+                        min: 0, 
+                        max: 100, 
+                        grid: { color: 'rgba(176, 141, 87, 0.15)' }, 
+                        ticks: { 
+                            stepSize: 25, 
+                            color: '#2F241C', 
+                            font: { family: 'Georgia, serif', size: 10 }, 
+                            callback: function(value) { 
+                                if (value === 25) return 'Negative'; 
+                                if (value === 50) return 'Neutral'; 
+                                if (value === 75) return 'Positive'; 
+                                if (value === 0 || value === 100) return value; 
+                                return ''; 
+                            } 
+                        } 
+                    } 
+                } 
+            } 
+        }); 
+    } 
+</script> 
+    {% endif %} 
+</body> 
+</html> 
+ 
