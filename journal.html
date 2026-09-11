@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Journal Entry</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <form class="journal-page" method="POST" action="{{ url_for('analyze') }}">
+        <div class="header">
+            <div class="ornament">✦</div>
+            <h1>Dear Journal</h1>
+            <p>Write what is on your mind...</p>
+        </div>
+
+        <textarea class="journal-input" name="journal_entry" required
+        placeholder="Dear Journal,
+Today I feel...
+Write anything you'd like to share.
+There are no right or wrong words."></textarea>
+
+        <button class="analyze-button" type="submit">ANALYZE MOOD</button>
+        <div class="footer">YOUR THOUGHTS • YOUR SPACE • YOUR STORY</div>
+
+    </form>
+</body>
+</html>

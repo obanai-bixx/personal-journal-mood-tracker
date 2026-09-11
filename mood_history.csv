@@ -1,0 +1,35 @@
+date,text,mood,compound,positive,neutral,negative
+"05 Sep 2026, 08:19 PM",i felt very happy and nice.,Positive,0.794,0.638,0.362,0.0
+"05 Sep 2026, 08:22 PM",i feel very happy today.,Positive,0.612,0.5,0.5,0.0
+"05 Sep 2026, 08:22 PM",happy,Positive,0.572,1.0,0.0,0.0
+"05 Sep 2026, 08:38 PM",okok.,Neutral,0.0,0.0,1.0,0.0
+"05 Sep 2026, 08:49 PM","dear journal,
+i feel very happy today!!!!",Positive,0.83,0.608,0.392,0.0
+"05 Sep 2026, 08:50 PM",happy and tired.,Positive,0.202,0.487,0.132,0.382
+"05 Sep 2026, 09:08 PM",happy,Positive,0.572,1.0,0.0,0.0
+"05 Sep 2026, 09:10 PM",happ6y,Neutral,0.0,0.0,1.0,0.0
+"05 Sep 2026, 09:14 PM",you are happy i am happy who is sad,Positive,0.649,0.448,0.364,0.188
+"05 Sep 2026, 09:16 PM",i am soo happy,Positive,0.572,0.552,0.448,0.0
+"05 Sep 2026, 09:16 PM",sad,Negative,-0.477,0.0,0.0,1.0
+"05 Sep 2026, 09:17 PM",saddddd,Neutral,0.0,0.0,1.0,0.0
+"05 Sep 2026, 09:20 PM",iam frustrated,Negative,-0.527,0.0,0.227,0.773
+"05 Sep 2026, 09:23 PM",you are very special to me,Positive,0.458,0.374,0.626,0.0
+"05 Sep 2026, 09:24 PM",jokrr,Neutral,0.0,0.0,1.0,0.0
+"05 Sep 2026, 09:49 PM",what the real turmoil.,Negative,-0.361,0.0,0.545,0.455
+"05 Sep 2026, 09:55 PM",happy and cheerful,Positive,0.802,0.878,0.122,0.0
+"06 Sep 2026, 10:41 AM",I had such a nice day today. I finished my work and I'm really happy.,Positive,0.778,0.343,0.657,0.0
+"06 Sep 2026, 10:49 AM",i feel smtg excited.,Positive,0.34,0.444,0.556,0.0
+"06 Sep 2026, 10:50 AM",i feel smtg excited.,Positive,0.34,0.444,0.556,0.0
+"06 Sep 2026, 10:59 AM",happy,Positive,0.572,1.0,0.0,0.0
+"06 Sep 2026, 03:31 PM",happy,Positive,0.572,1.0,0.0,0.0
+"06 Sep 2026, 03:32 PM",hsgkjh,Neutral,0.0,0.0,1.0,0.0
+"06 Sep 2026, 04:17 PM",i feel sad.,Negative,-0.477,0.0,0.392,0.608
+"06 Sep 2026, 04:18 PM",good,Positive,0.44,1.0,0.0,0.0
+"06 Sep 2026, 04:21 PM",i feel somewhat happy,Positive,0.528,0.532,0.468,0.0
+"06 Sep 2026, 04:54 PM",happy,Positive,0.572,1.0,0.0,0.0
+"06 Sep 2026, 05:07 PM",i am very happy today.,Positive,0.612,0.5,0.5,0.0
+"06 Sep 2026, 05:07 PM",happy,Positive,0.572,1.0,0.0,0.0
+"11 Sep 2026, 11:18 PM",i feel happy.,Positive,0.572,0.649,0.351,0.0
+"11 Sep 2026, 11:34 PM",excited,Positive,0.34,1.0,0.0,0.0
+"11 Sep 2026, 11:36 PM",i feel very happy.,Positive,0.612,0.571,0.429,0.0
+"11 Sep 2026, 11:38 PM",happy,Positive,0.572,1.0,0.0,0.0

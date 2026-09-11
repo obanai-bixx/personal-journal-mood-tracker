@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="journal-page">
+        <div class="header">
+            <div class="ornament">✦</div>
+            <h1>Mood History</h1>
+            <p>A collection of your thoughts</p>
+        </div>
+
+        <div class="history-container">
+            {% if entries %}
+                {% for entry in entries %}
+                    <div class="history-entry">
+                        <div class="entry-date">{{ entry.date }}</div>
+                        <div class="entry-text">"{{ entry.text }}"</div>
+                        <div class="entry-details">
+                            <span>
+                                {% if entry.mood == "Positive" %}☺{% elif entry.mood == "Negative" %}☹{% else %}•{% endif %}
+                                {{ entry.mood }}
+                            </span>
+                            <span>Score: {{ entry.compound }}</span>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="empty-history">✦<br><br>No journal entries yet.<br>Your thoughts will appear here after you analyze them.</div>
+            {% endif %}
+        </div>
+
+        <div class="buttons">
+            <a class="action-button" href="{{ url_for('journal') }}">NEW ENTRY</a>
+            <a class="action-button" href="{{ url_for('graph') }}">MOOD GRAPH →</a>
+        </div>
+
+        <a class="close-journal-button" href="{{ url_for('home') }}">CLOSE JOURNAL</a>
+    </div>
+</body>
+</html>

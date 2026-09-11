@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="journal-page">
+        <div class="header">
+            <div class="ornament">✦</div>
+            <h1>Mood Analysis</h1>
+            <p>A reflection of your thoughts</p>
+        </div>
+
+        <div class="mood-card">
+            <div class="mood-label">DETECTED MOOD</div>
+            <div class="mood">
+                {% if entry.mood == "Positive" %}☺{% elif entry.mood == "Negative" %}☹{% else %}•{% endif %}
+                {{ entry.mood }}
+            </div>
+        </div>
+
+        <div class="scores">
+            <div class="score-card">
+                <div class="score-title">COMPOUND</div>
+                <div class="score">{{ entry.compound }}</div>
+            </div>
+            <div class="score-card">
+                <div class="score-title">POSITIVE</div>
+                <div class="score">{{ entry.positive }}</div>
+            </div>
+            <div class="score-card">
+                <div class="score-title">NEGATIVE</div>
+                <div class="score">{{ entry.negative }}</div>
+            </div>
+        </div>
+
+        <div class="interpretation">{{ interpretation }}</div>
+
+        <div class="buttons">
+            <a class="action-button" href="{{ url_for('history') }}">HISTORY</a>
+            <a class="action-button" href="{{ url_for('graph') }}">MOOD GRAPH</a>
+        </div>
+
+        <a class="action-button write-another-btn" href="{{ url_for('journal') }}">WRITE ANOTHER ENTRY</a>
+    </div>
+</body>
+</html>
